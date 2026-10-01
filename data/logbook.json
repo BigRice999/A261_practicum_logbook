@@ -1,0 +1,36 @@
+[
+    {
+        "date": "2026-09-29",
+        "dailyTasks": [
+            "Reviewed daily operational records and checked items requiring follow-up.",
+            "Updated the relevant information based on the latest available status.",
+            "Prepared the required information for the next working process."
+        ],
+        "projectTasks": [
+            "Continued updating the assigned practicum project."
+        ]
+    },
+    {
+        "date": "2026-09-30",
+        "dailyTasks": [
+            "Reviewed outstanding activities and updated the latest status.",
+            "Followed up on items requiring further confirmation."
+        ],
+        "projectTasks": [
+            "Reviewed project information and documented the latest progress.",
+            "Organised supporting information for future reference."
+        ]
+    },
+    {
+        "date": "2026-10-01",
+        "dailyTasks": [
+            "Checked the latest status of assigned daily tasks.",
+            "Updated records based on the latest information received.",
+            "Assisted with follow-up activities where required."
+        ],
+        "projectTasks": [
+            "Continued working on practicum documentation.",
+            "Reviewed and organised the latest project information."
+        ]
+    }
+]
