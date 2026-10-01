@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practicum Logbook</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         SIDEBAR
+    =============================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">P</div>
+
+            <div>
+                <h1>Practicum</h1>
+                <span>Logbook</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <button
+                class="nav-item active"
+                data-page="home"
+            >
+                <span>⌂</span>
+                <span>Home</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-page="daily-entry"
+            >
+                <span>▣</span>
+                <span>Daily Entry</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <span>Practicum 2026</span>
+        </div>
+
+    </aside>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+
+    <main class="main-content">
+
+        <!-- Mobile Header -->
+
+        <header class="mobile-header">
+
+            <button id="mobile-menu-button">
+                ☰
+            </button>
+
+            <span>Practicum Logbook</span>
+
+        </header>
+
+
+        <!-- ==============================
+             HOME PAGE
+        =============================== -->
+
+        <section
+            id="home-page"
+            class="page active-page"
+        >
+
+            <div class="page-header">
+
+                <div>
+                    <p class="eyebrow">PRACTICUM</p>
+
+                    <h2>Student Information</h2>
+
+                    <p class="page-description">
+                        Personal practicum logbook and daily activity record.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Student Information -->
+
+            <div class="student-card">
+
+                <div class="student-avatar">
+                    S
+                </div>
+
+                <div class="student-main-info">
+
+                    <h3 id="student-name">
+                        Your Name
+                    </h3>
+
+                    <p id="student-programme">
+                        Bachelor of Information Technology
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="information-grid">
+
+                <div class="info-card">
+                    <span class="info-label">
+                        Matric No.
+                    </span>
+
+                    <strong id="student-matric">
+                        Your Matric No.
+                    </strong>
+                </div>
+
+
+                <div class="info-card">
+                    <span class="info-label">
+                        University
+                    </span>
+
+                    <strong id="student-university">
+                        Universiti Utara Malaysia
+                    </strong>
+                </div>
+
+
+                <div class="info-card">
+                    <span class="info-label">
+                        Company
+                    </span>
+
+                    <strong id="student-company">
+                        Company Name
+                    </strong>
+                </div>
+
+
+                <div class="info-card">
+                    <span class="info-label">
+                        Department
+                    </span>
+
+                    <strong id="student-department">
+                        Department
+                    </strong>
+                </div>
+
+
+                <div class="info-card">
+                    <span class="info-label">
+                        Supervisor
+                    </span>
+
+                    <strong id="student-supervisor">
+                        Supervisor Name
+                    </strong>
+                </div>
+
+
+                <div class="info-card">
+                    <span class="info-label">
+                        Practicum Period
+                    </span>
+
+                    <strong id="student-period">
+                        September 2026 – March 2027
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <!-- Overview -->
+
+            <div class="section-header">
+
+                <div>
+                    <p class="eyebrow">OVERVIEW</p>
+
+                    <h3>Practicum Progress</h3>
+                </div>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+                <div class="overview-card">
+
+                    <span class="overview-icon">
+                        ◷
+                    </span>
+
+                    <div>
+                        <span>Total Weeks</span>
+
+                        <strong id="total-weeks">
+                            24
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <span class="overview-icon">
+                        ✓
+                    </span>
+
+                    <div>
+                        <span>Days Recorded</span>
+
+                        <strong id="days-recorded">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <span class="overview-icon">
+                        →
+                    </span>
+
+                    <div>
+                        <span>Current Week</span>
+
+                        <strong id="current-week">
+                            1
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             DAILY ENTRY PAGE
+        =============================== -->
+
+        <section
+            id="daily-entry-page"
+            class="page"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        PRACTICUM RECORD
+                    </p>
+
+                    <h2>Daily Entry</h2>
+
+                    <p class="page-description">
+                        Browse your practicum activities by calendar or timeline.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Controls -->
+
+            <div class="entry-controls">
+
+                <button
+                    id="previous-month"
+                    class="month-button"
+                >
+                    ←
+                </button>
+
+
+                <h3 id="current-month">
+                    September 2026
+                </h3>
+
+
+                <button
+                    id="next-month"
+                    class="month-button"
+                >
+                    →
+                </button>
+
+
+                <div class="view-switcher">
+
+                    <button
+                        id="calendar-view-button"
+                        class="view-button active"
+                    >
+                        Calendar
+                    </button>
+
+                    <button
+                        id="timeline-view-button"
+                        class="view-button"
+                    >
+                        Timeline
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Calendar -->
+
+            <div
+                id="calendar-view"
+                class="entry-view active-view"
+            >
+
+                <div class="calendar">
+
+                    <div class="calendar-weekdays">
+
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+
+                    </div>
+
+
+                    <div
+                        id="calendar-days"
+                        class="calendar-days"
+                    >
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Timeline -->
+
+            <div
+                id="timeline-view"
+                class="entry-view"
+            >
+
+                <div id="timeline-container">
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         ENTRY MODAL
+    =============================== -->
+
+    <div
+        id="entry-modal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <button
+                id="close-modal"
+                class="close-modal"
+            >
+                ×
+            </button>
+
+
+            <p
+                id="modal-date"
+                class="eyebrow"
+            >
+                DATE
+            </p>
+
+
+            <h2 id="modal-title">
+                Entry Title
+            </h2>
+
+
+            <div
+                id="modal-week"
+                class="modal-week"
+            >
+                Week 1
+            </div>
+
+
+            <div class="modal-section">
+
+                <h4>Activities</h4>
+
+                <ul id="modal-activities">
+                </ul>
+
+            </div>
+
+
+            <div class="modal-section">
+
+                <h4>Reflection</h4>
+
+                <p id="modal-reflection">
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="data/entries.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
