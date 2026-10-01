@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practicum E-Logbook</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER / NAVIGATION
+    ========================== -->
+    <header class="site-header">
+        <div class="navbar container">
+
+            <a href="index.html" class="brand">
+                Tammie's Practicum E-Logbook
+            </a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link active">
+                    About Me
+                </a>
+
+                <a href="logbook.html" class="nav-link">
+                    Logbook Entry
+                </a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+    <main class="container main-content">
+
+        <!-- Page Introduction -->
+        <section class="page-heading">
+            <p class="eyebrow">A261 PRACTICUM</p>
+
+            <h1>About Me</h1>
+
+            <!--<p>
+                Student and practicum information throughout the
+                six-month industrial training period.
+            </p>-->
+        </section>
+
+
+        <!-- =========================
+             PRACTICUM PROGRESS
+        ========================== -->
+
+        <!--
+            IMPORTANT:
+            Replace data-start-date and data-end-date
+            with your actual practicum dates.
+
+            Format:
+            YYYY-MM-DD
+        -->
+
+        <section
+            class="progress-card"
+            id="practicumProgress"
+            data-start-date="21-09-2026"
+            data-end-date="22-03-2027"
+        >
+
+            <div class="progress-header">
+
+                <div>
+                    <p class="section-label">
+                        PRACTICUM DURATION
+                    </p>
+
+                    <h2>6 Months</h2>
+                </div>
+
+                <span
+                    class="progress-percentage"
+                    id="progressPercentage"
+                >
+                    0%
+                </span>
+
+            </div>
+
+
+            <div class="practicum-period">
+                <span>Practicum Progress</span>
+
+                <strong id="practicumDateRange">
+                    21st September 2026 — 22nd March 2027
+                </strong>
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
+            </div>
+
+
+            <div class="progress-footer">
+
+                <span id="progressDay">
+                    Day 0
+                </span>
+
+                <span id="remainingDays">
+                    —
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INFORMATION CARDS
+        ========================== -->
+
+        <section class="information-grid">
+
+
+            <!-- STUDENT INFORMATION -->
+            <article class="info-card">
+
+                <div class="card-heading">
+                    <span class="card-number">01</span>
+
+                    <div>
+                        <p class="section-label">
+                            PERSONAL DETAILS
+                        </p>
+
+                        <h2>Student Information</h2>
+                    </div>
+                </div>
+
+
+                <div class="info-list">
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Student Name
+                        </span>
+
+                        <span class="info-value">
+                            TAMMIE TAN QIAN HAN
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Matric No.
+                        </span>
+
+                        <span class="info-value">
+                            299660
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Phone Number
+                        </span>
+
+                        <span class="info-value">
+                            +60 11-5508-0119
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Email
+                        </span>
+
+                        <span class="info-value">
+                            ttqh299660@gmail.com
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Home Address
+                        </span>
+
+                        <span class="info-value">
+                            Kuching, Sarawak, Malaysia
+                        </span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- COMPANY INFORMATION -->
+            <article class="info-card">
+
+                <div class="card-heading">
+                    <span class="card-number">02</span>
+
+                    <div>
+                        <p class="section-label">
+                            PRACTICUM DETAILS
+                        </p>
+
+                        <h2>Company Information</h2>
+                    </div>
+                </div>
+
+
+                <div class="info-list">
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Company Name
+                        </span>
+
+                        <span class="info-value">
+                            SARAWAK INFORMATION SYSTEMS SDN. BHD.
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Company Address
+                        </span>
+
+                        <span class="info-value">
+                            SAINS 3rd Mile Office, 
+                            1st Floor, SL43-44, L2750-2751, 
+                            Jalan Tun Ahmad Zaidi Adruce, 
+                            Central Park, 93150 Kuching, Sarawak.
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Company Supervisor
+                        </span>
+
+                        <span class="info-value">
+                            LAI POH YONG
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Designation
+                        </span>
+
+                        <span class="info-value">
+                            Technical Lead of Software Development (PHP)
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Phone Number
+                        </span>
+
+                        <span class="info-value">
+                            +60 16-894-3897
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Email
+                        </span>
+
+                        <span class="info-value">
+                            laipy@sains.com.my
+                        </span>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =========================
+             UNIVERSITY SUPERVISORS
+        ========================== -->
+
+        <section class="info-card supervisor-card">
+
+            <div class="card-heading">
+
+                <span class="card-number">03</span>
+
+                <div>
+                    <p class="section-label">
+                        UNIVERSITY
+                    </p>
+
+                    <h2>UUM Supervisors</h2>
+                </div>
+
+            </div>
+
+
+            <div class="supervisor-grid">
+
+                <!-- Supervisor 1 -->
+                <div class="supervisor-item">
+
+                    <p class="supervisor-title">
+                        UUM Report Supervisor
+                    </p>
+
+                    <h3>
+                        SHARMILA BINTI MAT YUSOF
+                    </h3>  
+                    
+                    <p class="supervisor-title">
+                        UUM Visiting Supervisor
+                    </p>
+
+                    <h3>
+                        
+                    </h3> 
+
+                </div>
+
+
+                <!--
+                    If you have another university supervisor,
+                    copy this entire block.
+
+                <div class="supervisor-item">
+
+                    <p class="supervisor-title">
+                        University Supervisor
+                    </p>
+
+                    <h3>
+                        Second Supervisor Name
+                    </h3>
+
+                    <p>
+                        Faculty / School Name
+                    </p>
+
+                    <p>
+                        University Name
+                    </p>
+
+                    <a href="mailto:supervisor2@example.com">
+                        supervisor2@example.com
+                    </a>
+
+                </div>
+                -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                Practicum E-Logbook
+                <span id="currentYear"></span>
+            </p>
+
+            <p class="footer-note">
+                For practicum documentation and academic review.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+</html>

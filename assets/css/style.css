@@ -1,0 +1,597 @@
+/* ========================================
+   GLOBAL
+======================================== */
+
+:root {
+    --background: #f5f7fb;
+    --surface: #ffffff;
+
+    --text-primary: #172033;
+    --text-secondary: #667085;
+
+    --border: #e5e9f0;
+
+    --primary: #315efb;
+    --primary-dark: #2448c8;
+    --primary-light: #edf2ff;
+
+    --shadow:
+        0 8px 30px rgba(16, 24, 40, 0.06);
+
+    --radius-lg: 20px;
+    --radius-md: 14px;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: var(--background);
+    color: var(--text-primary);
+
+    line-height: 1.6;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+.container {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.site-header {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid var(--border);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+
+.navbar {
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.brand {
+    font-size: 1.05rem;
+    font-weight: 700;
+
+    letter-spacing: -0.02em;
+}
+
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.nav-link {
+    padding: 9px 15px;
+
+    border-radius: 9px;
+
+    color: var(--text-secondary);
+
+    font-size: 0.92rem;
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+
+.nav-link:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+
+.nav-link.active {
+    background: var(--primary-light);
+    color: var(--primary);
+
+    font-weight: 600;
+}
+
+
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+
+.main-content {
+    padding-top: 64px;
+    padding-bottom: 80px;
+}
+
+
+.page-heading {
+    max-width: 700px;
+
+    margin-bottom: 34px;
+}
+
+
+.eyebrow,
+.section-label {
+    color: var(--primary);
+
+    font-size: 0.72rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+
+.page-heading h1 {
+    margin-top: 8px;
+
+    font-size: clamp(2rem, 5vw, 3rem);
+
+    letter-spacing: -0.04em;
+
+    line-height: 1.15;
+}
+
+
+.page-heading > p:last-child {
+    color: var(--text-secondary);
+
+    margin-top: 12px;
+
+    font-size: 1rem;
+}
+
+
+
+/* ========================================
+   PROGRESS CARD
+======================================== */
+
+.progress-card {
+    background:
+        linear-gradient(
+            135deg,
+            #172033,
+            #253152
+        );
+
+    color: white;
+
+    padding: 30px;
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 26px;
+}
+
+
+.progress-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.progress-card .section-label {
+    color: #aabcfb;
+}
+
+
+.progress-header h2 {
+    margin-top: 5px;
+
+    font-size: 1.5rem;
+
+    letter-spacing: -0.03em;
+}
+
+
+.progress-percentage {
+    font-size: 2rem;
+    font-weight: 700;
+
+    letter-spacing: -0.04em;
+}
+
+
+.practicum-period {
+    margin-top: 26px;
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color: #c7cedd;
+
+    font-size: 0.9rem;
+}
+
+
+.practicum-period strong {
+    color: white;
+
+    font-weight: 600;
+}
+
+
+.progress-track {
+    height: 10px;
+
+    margin-top: 14px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border-radius: 999px;
+
+    overflow: hidden;
+}
+
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background: #ffffff;
+
+    border-radius: inherit;
+
+    transition: width 0.6s ease;
+}
+
+
+.progress-footer {
+    margin-top: 12px;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: #c7cedd;
+
+    font-size: 0.82rem;
+}
+
+
+
+/* ========================================
+   INFORMATION
+======================================== */
+
+.information-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 26px;
+
+    margin-bottom: 26px;
+}
+
+
+.info-card {
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    padding: 28px;
+
+    box-shadow: var(--shadow);
+}
+
+
+.card-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+.card-heading h2 {
+    margin-top: 2px;
+
+    font-size: 1.18rem;
+
+    letter-spacing: -0.02em;
+}
+
+
+.card-number {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--primary-light);
+    color: var(--primary);
+
+    border-radius: 12px;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.info-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(120px, 0.8fr)
+        minmax(0, 1.5fr);
+
+    gap: 18px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.info-row:last-child {
+    border-bottom: 0;
+}
+
+
+.info-label {
+    color: var(--text-secondary);
+
+    font-size: 0.85rem;
+}
+
+
+.info-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    overflow-wrap: anywhere;
+}
+
+
+
+/* ========================================
+   UNIVERSITY SUPERVISOR
+======================================== */
+
+.supervisor-card {
+    margin-bottom: 0;
+}
+
+
+.supervisor-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+.supervisor-item {
+    padding: 20px;
+
+    border: 1px solid var(--border);
+
+    background: #fafbfc;
+
+    border-radius: var(--radius-md);
+}
+
+
+.supervisor-title {
+    color: var(--text-secondary);
+
+    font-size: 0.78rem;
+
+    margin-bottom: 5px;
+}
+
+
+.supervisor-item h3 {
+    font-size: 1rem;
+
+    margin-bottom: 5px;
+}
+
+
+.supervisor-item > p:not(.supervisor-title) {
+    color: var(--text-secondary);
+
+    font-size: 0.85rem;
+}
+
+
+.supervisor-item a {
+    display: inline-block;
+
+    margin-top: 10px;
+
+    color: var(--primary);
+
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.site-footer {
+    padding: 28px 0;
+
+    background: white;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--text-secondary);
+
+    text-align: center;
+
+    font-size: 0.8rem;
+}
+
+
+.footer-note {
+    margin-top: 3px;
+}
+
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 850px) {
+
+    .information-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .supervisor-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: min(100% - 28px, 1120px);
+    }
+
+
+    .navbar {
+        min-height: auto;
+
+        padding-top: 14px;
+        padding-bottom: 14px;
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+
+    .nav-menu {
+        width: 100%;
+    }
+
+
+    .nav-link {
+        flex: 1;
+
+        text-align: center;
+    }
+
+
+    .main-content {
+        padding-top: 40px;
+        padding-bottom: 50px;
+    }
+
+
+    .progress-card {
+        padding: 22px;
+    }
+
+
+    .progress-percentage {
+        font-size: 1.6rem;
+    }
+
+
+    .practicum-period {
+        flex-direction: column;
+
+        gap: 3px;
+    }
+
+
+    .info-card {
+        padding: 22px;
+    }
+
+
+    .info-row {
+        grid-template-columns: 1fr;
+
+        gap: 4px;
+    }
+
+
+    .progress-footer {
+        flex-direction: column;
+
+        gap: 2px;
+    }
+
+}
