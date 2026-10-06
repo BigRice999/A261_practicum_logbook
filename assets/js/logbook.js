@@ -6,12 +6,16 @@ document.addEventListener(
 
 
 /* ========================================
-   GLOBAL STATE
+   STATE
 ======================================== */
 
-let logbookEntries = [];
+let entries = [];
 
-let selectedDate = null;
+let practicumStart = null;
+
+let weekOneStart = null;
+
+let selectedWeek = 1;
 
 let calendarCursor = new Date();
 
@@ -23,6 +27,27 @@ let calendarCursor = new Date();
 
 async function initialiseLogbook() {
 
+    const app =
+        document.getElementById("logbookApp");
+
+
+    practicumStart =
+        lbCreateDate(
+            app.dataset.practicumStart
+        );
+
+
+    /*
+        Week 1 always follows Monday-Friday.
+
+        If practicum officially starts on a Monday,
+        that Monday becomes Week 1 directly.
+    */
+
+    weekOneStart =
+        lbGetMonday(practicumStart);
+
+
     setupDrawer();
 
     setupViewSwitch();
@@ -33,89 +58,81 @@ async function initialiseLogbook() {
     try {
 
         const response =
-            await fetch("data/logbook.json");
+            await fetch(
+                "data/logbook.json"
+            );
 
 
         if (!response.ok) {
 
             throw new Error(
-                "Unable to load logbook data."
+                "Unable to load logbook.json"
             );
 
         }
 
 
-        logbookEntries =
+        entries =
             await response.json();
 
 
-        /*
-            Sort oldest -> newest
-        */
-
-        logbookEntries.sort(
+        entries.sort(
             (a, b) =>
-                createLocalDate(a.date)
+                lbCreateDate(a.date)
                 -
-                createLocalDate(b.date)
+                lbCreateDate(b.date)
         );
 
 
-        if (logbookEntries.length === 0) {
+        if (entries.length === 0) {
 
-            showNoEntries();
+            showEmptyLogbook();
+
+            renderCalendar();
 
             return;
 
         }
 
 
-        renderTimeline();
-
-
         /*
-            Default entry:
-
-            1. Today's entry if available
-            2. Otherwise latest entry
+            Default:
+            select the week containing
+            the latest logbook entry.
         */
 
-        const todayKey =
-            formatDateKey(new Date());
-
-
-        const todayEntry =
-            logbookEntries.find(
-                entry =>
-                    entry.date === todayKey
-            );
-
-
-        const defaultEntry =
-            todayEntry
-            ??
-            logbookEntries[
-                logbookEntries.length - 1
+        const latestEntry =
+            entries[
+                entries.length - 1
             ];
 
 
-        selectedDate =
-            defaultEntry.date;
-
-
-        calendarCursor =
-            createLocalDate(
-                selectedDate
+        const latestDate =
+            lbCreateDate(
+                latestEntry.date
             );
 
 
-        selectEntry(
-            selectedDate,
+        selectedWeek =
+            getPracticumWeek(
+                latestDate
+            );
+
+
+        calendarCursor =
+            new Date(
+                latestDate.getFullYear(),
+                latestDate.getMonth(),
+                1
+            );
+
+
+        renderTimeline();
+
+        selectWeek(
+            selectedWeek,
             false
         );
-
-
-        renderCalendar();
 
     }
 
@@ -125,13 +142,13 @@ async function initialiseLogbook() {
 
 
         document.getElementById(
-            "timelineList"
+            "weekTimeline"
         ).innerHTML =
             `
-            <p class="empty-task-message">
+            <div class="logbook-error">
                 Unable to load logbook data.
                 Please check data/logbook.json.
-            </p>
+            </div>
             `;
 
     }
@@ -141,107 +158,28 @@ async function initialiseLogbook() {
 
 
 /* ========================================
-   SELECT ENTRY
+   SELECT WEEK
 ======================================== */
 
-function selectEntry(
-    date,
-    closeMobileDrawer = true
+function selectWeek(
+    weekNumber,
+    closeMobile = true
 ) {
 
-    const entry =
-        logbookEntries.find(
-            item =>
-                item.date === date
-        );
+    selectedWeek =
+        weekNumber;
 
 
-    if (!entry) {
-        return;
-    }
-
-
-    selectedDate = date;
-
-
-    const entryDate =
-        createLocalDate(entry.date);
-
-
-    calendarCursor =
-        new Date(
-            entryDate.getFullYear(),
-            entryDate.getMonth(),
-            1
-        );
-
-
-    const weekNumber =
-        getPracticumWeek(
-            entryDate
-        );
-
-
-    /*
-        Heading
-    */
-
-    document.getElementById(
-        "selectedDateTitle"
-    ).textContent =
-        formatLongDate(
-            entryDate
-        );
-
-
-    document.getElementById(
-        "selectedDateCode"
-    ).textContent =
-        entry.date;
-
-
-    const weekBadge =
-        document.getElementById(
-            "selectedWeekBadge"
-        );
-
-
-    weekBadge.hidden = false;
-
-    weekBadge.textContent =
-        `Week ${weekNumber}`;
-
-
-    /*
-        Tasks
-    */
-
-    renderTaskList(
-        "dailyTasks",
-        entry.dailyTasks,
-        "No daily tasks recorded for this date."
-    );
-
-
-    renderTaskList(
-        "projectTasks",
-        entry.projectTasks,
-        "No project tasks recorded for this date."
-    );
-
-
-    /*
-        Update navigation highlights
-    */
+    renderWeek();
 
     updateTimelineSelection();
 
     renderCalendar();
 
 
-    if (closeMobileDrawer) {
+    if (closeMobile) {
 
-        closeDrawer();
+        closeWeekDrawer();
 
     }
 
@@ -250,22 +188,344 @@ function selectEntry(
 
 
 /* ========================================
-   TASK LIST
+   RENDER FULL WEEK
 ======================================== */
 
-function renderTaskList(
-    containerId,
-    tasks,
-    emptyMessage
-) {
+function renderWeek() {
+
+    const weekStart =
+        getWeekStart(
+            selectedWeek
+        );
+
+
+    const friday =
+        lbAddDays(
+            weekStart,
+            4
+        );
+
+
+    /*
+        Heading
+    */
+
+    document.getElementById(
+        "weekTitle"
+    ).textContent =
+        `Week ${selectedWeek}`;
+
+
+    document.getElementById(
+        "weekNumberBadge"
+    ).textContent =
+        `Week ${selectedWeek}`;
+
+
+    document.getElementById(
+        "weekDateRange"
+    ).textContent =
+        `${lbFormatShortDate(weekStart)} — ${lbFormatShortDate(friday)}`;
+
+
+    /*
+        Monday - Friday
+    */
 
     const container =
         document.getElementById(
-            containerId
+            "weekEntryList"
         );
 
 
     container.innerHTML = "";
+
+
+    for (
+        let dayIndex = 0;
+        dayIndex < 5;
+        dayIndex++
+    ) {
+
+        const currentDate =
+            lbAddDays(
+                weekStart,
+                dayIndex
+            );
+
+
+        const dateKey =
+            lbDateKey(
+                currentDate
+            );
+
+
+        const entry =
+            entries.find(
+                item =>
+                    item.date === dateKey
+            );
+
+
+        container.appendChild(
+            buildDayCard(
+                currentDate,
+                entry
+            )
+        );
+
+    }
+
+}
+
+
+
+/* ========================================
+   BUILD MONDAY-FRIDAY CARD
+======================================== */
+
+function buildDayCard(
+    date,
+    entry
+) {
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+
+    card.className =
+        "weekday-entry-card";
+
+
+    const header =
+        document.createElement(
+            "header"
+        );
+
+
+    header.className =
+        "weekday-entry-header";
+
+
+    const dayBlock =
+        document.createElement(
+            "div"
+        );
+
+
+    const dayName =
+        document.createElement(
+            "p"
+        );
+
+
+    dayName.className =
+        "weekday-name";
+
+
+    dayName.textContent =
+        new Intl.DateTimeFormat(
+            "en-MY",
+            {
+                weekday: "long"
+            }
+        ).format(date);
+
+
+    const fullDate =
+        document.createElement(
+            "h2"
+        );
+
+
+    fullDate.textContent =
+        lbFormatLongDate(date);
+
+
+    dayBlock.append(
+        dayName,
+        fullDate
+    );
+
+
+    const dateCode =
+        document.createElement(
+            "span"
+        );
+
+
+    dateCode.className =
+        "weekday-date-code";
+
+
+    dateCode.textContent =
+        lbDateKey(date);
+
+
+    header.append(
+        dayBlock,
+        dateCode
+    );
+
+
+    card.appendChild(
+        header
+    );
+
+
+    /*
+        Day before official practicum start
+    */
+
+    if (date < practicumStart) {
+
+        const empty =
+            document.createElement(
+                "div"
+            );
+
+
+        empty.className =
+            "no-entry-state";
+
+
+        empty.textContent =
+            "Outside the practicum period.";
+
+
+        card.appendChild(
+            empty
+        );
+
+
+        return card;
+
+    }
+
+
+    /*
+        No entry for that weekday
+    */
+
+    if (!entry) {
+
+        const empty =
+            document.createElement(
+                "div"
+            );
+
+
+        empty.className =
+            "no-entry-state";
+
+
+        empty.innerHTML =
+            `
+            <strong>No logbook entry recorded.</strong>
+            <span>
+                No daily or project tasks are available for this date.
+            </span>
+            `;
+
+
+        card.appendChild(
+            empty
+        );
+
+
+        return card;
+
+    }
+
+
+    /*
+        Daily + Project grid
+    */
+
+    const body =
+        document.createElement(
+            "div"
+        );
+
+
+    body.className =
+        "weekday-task-grid";
+
+
+    body.appendChild(
+        buildTaskSection(
+            "Daily Tasks",
+            "DAILY RECORD",
+            entry.dailyTasks,
+            "No daily task recorded."
+        )
+    );
+
+
+    body.appendChild(
+        buildTaskSection(
+            "Project Tasks",
+            "PROJECT RECORD",
+            entry.projectTasks,
+            "No project task recorded."
+        )
+    );
+
+
+    card.appendChild(
+        body
+    );
+
+
+    return card;
+
+}
+
+
+
+/* ========================================
+   TASK SECTION
+======================================== */
+
+function buildTaskSection(
+    title,
+    label,
+    tasks,
+    emptyText
+) {
+
+    const section =
+        document.createElement(
+            "section"
+        );
+
+
+    section.className =
+        "weekday-task-section";
+
+
+    const heading =
+        document.createElement(
+            "div"
+        );
+
+
+    heading.className =
+        "weekday-task-heading";
+
+
+    heading.innerHTML =
+        `
+        <p>${label}</p>
+        <h3>${title}</h3>
+        `;
+
+
+    section.appendChild(
+        heading
+    );
 
 
     if (
@@ -274,40 +534,46 @@ function renderTaskList(
         tasks.length === 0
     ) {
 
-        const message =
-            document.createElement("p");
+        const empty =
+            document.createElement(
+                "p"
+            );
 
 
-        message.className =
-            "empty-task-message";
+        empty.className =
+            "weekday-task-empty";
 
 
-        message.textContent =
-            emptyMessage;
+        empty.textContent =
+            emptyText;
 
 
-        container.appendChild(
-            message
+        section.appendChild(
+            empty
         );
 
 
-        return;
+        return section;
 
     }
 
 
     const list =
-        document.createElement("ul");
+        document.createElement(
+            "ul"
+        );
 
 
     list.className =
-        "task-list";
+        "weekday-task-list";
 
 
     tasks.forEach(task => {
 
         const item =
-            document.createElement("li");
+            document.createElement(
+                "li"
+            );
 
 
         item.textContent =
@@ -321,9 +587,12 @@ function renderTaskList(
     });
 
 
-    container.appendChild(
+    section.appendChild(
         list
     );
+
+
+    return section;
 
 }
 
@@ -337,7 +606,7 @@ function renderTimeline() {
 
     const timeline =
         document.getElementById(
-            "timelineList"
+            "weekTimeline"
         );
 
 
@@ -345,28 +614,58 @@ function renderTimeline() {
 
 
     /*
-        Group:
-
-        Month
-            -> Week
-                -> Entries
+        Generate every practicum week
+        from Week 1 until latest recorded week.
     */
+
+    const latestDate =
+        lbCreateDate(
+            entries[
+                entries.length - 1
+            ].date
+        );
+
+
+    const latestWeek =
+        getPracticumWeek(
+            latestDate
+        );
+
 
     const grouped =
         new Map();
 
 
-    logbookEntries.forEach(entry => {
+    for (
+        let week = 1;
+        week <= latestWeek;
+        week++
+    ) {
 
-        const date =
-            createLocalDate(
-                entry.date
+        const monday =
+            getWeekStart(
+                week
             );
 
 
+        const friday =
+            lbAddDays(
+                monday,
+                4
+            );
+
+
+        /*
+            Group by the Friday's month.
+
+            Example:
+            28 Sep - 02 Oct
+            will appear under October.
+        */
+
         const monthKey =
-            `${date.getFullYear()}-${String(
-                date.getMonth() + 1
+            `${friday.getFullYear()}-${String(
+                friday.getMonth() + 1
             ).padStart(2, "0")}`;
 
 
@@ -377,13 +676,7 @@ function renderTimeline() {
                     month: "long",
                     year: "numeric"
                 }
-            ).format(date);
-
-
-        const week =
-            getPracticumWeek(
-                date
-            );
+            ).format(friday);
 
 
         if (!grouped.has(monthKey)) {
@@ -392,219 +685,146 @@ function renderTimeline() {
                 monthKey,
                 {
                     label: monthLabel,
-                    weeks: new Map()
+                    weeks: []
                 }
             );
 
         }
 
 
-        const month =
-            grouped.get(
-                monthKey
-            );
-
-
-        if (!month.weeks.has(week)) {
-
-            month.weeks.set(
+        grouped
+            .get(monthKey)
+            .weeks
+            .push({
                 week,
-                []
-            );
+                monday,
+                friday
+            });
 
-        }
-
-
-        month.weeks
-            .get(week)
-            .push(entry);
-
-    });
+    }
 
 
     /*
-        Show latest month first
+        Latest month first
     */
 
     const months =
         Array.from(
-            grouped.entries()
+            grouped.values()
         ).reverse();
 
 
     months.forEach(
-        ([monthKey, monthData], monthIndex) => {
+        (month, index) => {
 
-            const monthDetails =
+            const details =
                 document.createElement(
                     "details"
                 );
 
 
-            monthDetails.className =
+            details.className =
                 "timeline-month";
 
 
-            if (monthIndex === 0) {
+            if (index === 0) {
 
-                monthDetails.open = true;
+                details.open = true;
 
             }
 
 
-            const monthSummary =
+            const summary =
                 document.createElement(
                     "summary"
                 );
 
 
-            monthSummary.className =
-                "timeline-month-title";
+            summary.className =
+                "timeline-month-heading";
 
 
-            monthSummary.textContent =
-                monthData.label;
+            summary.textContent =
+                month.label;
 
 
-            monthDetails.appendChild(
-                monthSummary
+            details.appendChild(
+                summary
             );
 
 
-            const monthContent =
+            const weekList =
                 document.createElement(
                     "div"
                 );
 
 
-            monthContent.className =
-                "timeline-month-content";
+            weekList.className =
+                "timeline-week-list";
 
 
-            const weeks =
-                Array.from(
-                    monthData.weeks.entries()
-                ).reverse();
+            [...month.weeks]
+                .reverse()
+                .forEach(item => {
 
-
-            weeks.forEach(
-                ([weekNumber, entries]) => {
-
-                    const weekDetails =
+                    const button =
                         document.createElement(
-                            "details"
+                            "button"
                         );
 
 
-                    weekDetails.className =
-                        "timeline-week";
+                    button.type =
+                        "button";
 
 
-                    weekDetails.open = true;
+                    button.className =
+                        "timeline-week-button";
 
 
-                    const weekSummary =
-                        document.createElement(
-                            "summary"
-                        );
+                    button.dataset.week =
+                        item.week;
 
 
-                    weekSummary.className =
-                        "timeline-week-title";
+                    button.innerHTML =
+                        `
+                        <strong>
+                            Week ${item.week}
+                        </strong>
+
+                        <span>
+                            ${lbFormatTinyDate(item.monday)}
+                            —
+                            ${lbFormatTinyDate(item.friday)}
+                        </span>
+                        `;
 
 
-                    weekSummary.textContent =
-                        `Week ${weekNumber}`;
+                    button.addEventListener(
+                        "click",
+                        () => {
 
-
-                    weekDetails.appendChild(
-                        weekSummary
-                    );
-
-
-                    const dateList =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    dateList.className =
-                        "timeline-date-list";
-
-
-                    /*
-                        Latest date first
-                    */
-
-                    [...entries]
-                        .reverse()
-                        .forEach(entry => {
-
-                            const button =
-                                document.createElement(
-                                    "button"
-                                );
-
-
-                            button.type =
-                                "button";
-
-
-                            button.className =
-                                "timeline-date-button";
-
-
-                            button.dataset.date =
-                                entry.date;
-
-
-                            button.textContent =
-                                formatTimelineDate(
-                                    createLocalDate(
-                                        entry.date
-                                    )
-                                );
-
-
-                            button.addEventListener(
-                                "click",
-                                () => {
-
-                                    selectEntry(
-                                        entry.date
-                                    );
-
-                                }
+                            selectWeek(
+                                item.week
                             );
 
-
-                            dateList.appendChild(
-                                button
-                            );
-
-                        });
-
-
-                    weekDetails.appendChild(
-                        dateList
+                        }
                     );
 
 
-                    monthContent.appendChild(
-                        weekDetails
+                    weekList.appendChild(
+                        button
                     );
 
-                }
-            );
+                });
 
 
-            monthDetails.appendChild(
-                monthContent
+            details.appendChild(
+                weekList
             );
 
 
             timeline.appendChild(
-                monthDetails
+                details
             );
 
         }
@@ -615,22 +835,24 @@ function renderTimeline() {
 
 
 /* ========================================
-   TIMELINE ACTIVE DATE
+   TIMELINE SELECTED WEEK
 ======================================== */
 
 function updateTimelineSelection() {
 
     document
         .querySelectorAll(
-            ".timeline-date-button"
+            ".timeline-week-button"
         )
         .forEach(button => {
 
             button.classList.toggle(
                 "selected",
-                button.dataset.date
+                Number(
+                    button.dataset.week
+                )
                 ===
-                selectedDate
+                selectedWeek
             );
 
         });
@@ -645,19 +867,18 @@ function updateTimelineSelection() {
 
 function renderCalendar() {
 
-    const calendarGrid =
+    const grid =
         document.getElementById(
             "calendarGrid"
         );
 
 
-    const title =
-        document.getElementById(
-            "calendarMonthTitle"
-        );
+    if (!grid) {
+        return;
+    }
 
 
-    calendarGrid.innerHTML = "";
+    grid.innerHTML = "";
 
 
     const year =
@@ -668,7 +889,9 @@ function renderCalendar() {
         calendarCursor.getMonth();
 
 
-    title.textContent =
+    document.getElementById(
+        "calendarMonthTitle"
+    ).textContent =
         new Intl.DateTimeFormat(
             "en-MY",
             {
@@ -684,29 +907,37 @@ function renderCalendar() {
         );
 
 
-    const firstDay =
+    /*
+        Monday-first calendar.
+
+        JS:
+        Sunday = 0
+        Monday = 1
+
+        Convert:
+        Monday = 0
+        ...
+        Sunday = 6
+    */
+
+    const firstDate =
         new Date(
             year,
             month,
             1
-        ).getDay();
+        );
 
 
-    const daysInMonth =
-        new Date(
-            year,
-            month + 1,
-            0
-        ).getDate();
+    const firstDayOffset =
+        (
+            firstDate.getDay()
+            + 6
+        ) % 7;
 
-
-    /*
-        Empty spaces before day 1
-    */
 
     for (
         let i = 0;
-        i < firstDay;
+        i < firstDayOffset;
         i++
     ) {
 
@@ -717,19 +948,40 @@ function renderCalendar() {
 
 
         blank.className =
-            "calendar-day-empty";
+            "mini-calendar-empty";
 
 
-        calendarGrid.appendChild(
+        grid.appendChild(
             blank
         );
 
     }
 
 
+    const daysInMonth =
+        new Date(
+            year,
+            month + 1,
+            0
+        ).getDate();
+
+
     const todayKey =
-        formatDateKey(
+        lbDateKey(
             new Date()
+        );
+
+
+    const selectedStart =
+        getWeekStart(
+            selectedWeek
+        );
+
+
+    const selectedEnd =
+        lbAddDays(
+            selectedStart,
+            4
         );
 
 
@@ -747,40 +999,49 @@ function renderCalendar() {
             );
 
 
-        const dateKey =
-            formatDateKey(
+        const key =
+            lbDateKey(
                 date
             );
 
 
-        const hasEntry =
-            logbookEntries.some(
-                entry =>
-                    entry.date
-                    ===
-                    dateKey
-            );
-
-
-        const element =
+        const button =
             document.createElement(
-                hasEntry
-                ? "button"
-                : "span"
+                "button"
             );
 
 
-        element.className =
-            "calendar-day";
+        button.type =
+            "button";
 
 
-        element.textContent =
+        button.className =
+            "mini-calendar-day";
+
+
+        button.textContent =
             day;
 
 
-        if (dateKey === todayKey) {
+        const hasEntry =
+            entries.some(
+                entry =>
+                    entry.date === key
+            );
 
-            element.classList.add(
+
+        if (hasEntry) {
+
+            button.classList.add(
+                "has-entry"
+            );
+
+        }
+
+
+        if (key === todayKey) {
+
+            button.classList.add(
                 "today"
             );
 
@@ -788,40 +1049,42 @@ function renderCalendar() {
 
 
         if (
-            hasEntry
+            date >= selectedStart
             &&
-            dateKey === selectedDate
+            date <= selectedEnd
         ) {
 
-            element.classList.add(
-                "selected"
+            button.classList.add(
+                "selected-week"
             );
 
         }
 
 
-        if (hasEntry) {
+        button.addEventListener(
+            "click",
+            () => {
 
-            element.type =
-                "button";
+                const week =
+                    getPracticumWeek(
+                        date
+                    );
 
 
-            element.addEventListener(
-                "click",
-                () => {
+                if (week >= 1) {
 
-                    selectEntry(
-                        dateKey
+                    selectWeek(
+                        week
                     );
 
                 }
-            );
 
-        }
+            }
+        );
 
 
-        calendarGrid.appendChild(
-            element
+        grid.appendChild(
+            button
         );
 
     }
@@ -884,7 +1147,7 @@ function setupCalendarNavigation() {
 
 
 /* ========================================
-   CALENDAR / TIMELINE SWITCH
+   CALENDAR / TIMELINE VIEW
 ======================================== */
 
 function setupViewSwitch() {
@@ -979,50 +1242,44 @@ function setupViewSwitch() {
 
 function setupDrawer() {
 
-    const openButton =
-        document.getElementById(
-            "drawerToggle"
+    document
+        .getElementById(
+            "weekDrawerToggle"
+        )
+        .addEventListener(
+            "click",
+            openWeekDrawer
         );
 
 
-    const closeButton =
-        document.getElementById(
-            "drawerClose"
+    document
+        .getElementById(
+            "weekDrawerClose"
+        )
+        .addEventListener(
+            "click",
+            closeWeekDrawer
         );
 
 
-    const overlay =
-        document.getElementById(
-            "drawerOverlay"
+    document
+        .getElementById(
+            "weekDrawerOverlay"
+        )
+        .addEventListener(
+            "click",
+            closeWeekDrawer
         );
-
-
-    openButton.addEventListener(
-        "click",
-        openDrawer
-    );
-
-
-    closeButton.addEventListener(
-        "click",
-        closeDrawer
-    );
-
-
-    overlay.addEventListener(
-        "click",
-        closeDrawer
-    );
 
 }
 
 
 
-function openDrawer() {
+function openWeekDrawer() {
 
     document
         .getElementById(
-            "logbookDrawer"
+            "weekSidebar"
         )
         .classList.add(
             "open"
@@ -1031,7 +1288,7 @@ function openDrawer() {
 
     document
         .getElementById(
-            "drawerOverlay"
+            "weekDrawerOverlay"
         )
         .classList.add(
             "open"
@@ -1045,11 +1302,11 @@ function openDrawer() {
 
 
 
-function closeDrawer() {
+function closeWeekDrawer() {
 
     document
         .getElementById(
-            "logbookDrawer"
+            "weekSidebar"
         )
         .classList.remove(
             "open"
@@ -1058,7 +1315,7 @@ function closeDrawer() {
 
     document
         .getElementById(
-            "drawerOverlay"
+            "weekDrawerOverlay"
         )
         .classList.remove(
             "open"
@@ -1073,44 +1330,50 @@ function closeDrawer() {
 
 
 /* ========================================
-   PRACTICUM WEEK
+   WEEK CALCULATION
 ======================================== */
 
 function getPracticumWeek(date) {
 
-    const app =
-        document.getElementById(
-            "logbookApp"
-        );
-
-
-    const startDateString =
-        app.dataset.practicumStart;
-
-
-    const startDate =
-        createLocalDate(
-            startDateString
-        );
-
-
-    const oneDay =
-        1000 * 60 * 60 * 24;
+    const millisecondsPerDay =
+        86400000;
 
 
     const difference =
         Math.floor(
-            (date - startDate)
+            (
+                lbNormaliseDate(date)
+                -
+                lbNormaliseDate(
+                    weekOneStart
+                )
+            )
             /
-            oneDay
+            millisecondsPerDay
         );
 
 
-    return Math.max(
-        1,
+    return (
         Math.floor(
             difference / 7
-        ) + 1
+        )
+        + 1
+    );
+
+}
+
+
+
+function getWeekStart(
+    weekNumber
+) {
+
+    return lbAddDays(
+        weekOneStart,
+        (
+            weekNumber - 1
+        )
+        * 7
     );
 
 }
@@ -1121,7 +1384,9 @@ function getPracticumWeek(date) {
    DATE HELPERS
 ======================================== */
 
-function createLocalDate(dateString) {
+function lbCreateDate(
+    dateString
+) {
 
     const [
         year,
@@ -1143,7 +1408,76 @@ function createLocalDate(dateString) {
 
 
 
-function formatDateKey(date) {
+function lbNormaliseDate(
+    date
+) {
+
+    return new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+    );
+
+}
+
+
+
+function lbGetMonday(
+    date
+) {
+
+    const result =
+        lbNormaliseDate(date);
+
+
+    const day =
+        result.getDay();
+
+
+    const difference =
+        day === 0
+            ? -6
+            : 1 - day;
+
+
+    result.setDate(
+        result.getDate()
+        +
+        difference
+    );
+
+
+    return result;
+
+}
+
+
+
+function lbAddDays(
+    date,
+    amount
+) {
+
+    const result =
+        new Date(date);
+
+
+    result.setDate(
+        result.getDate()
+        +
+        amount
+    );
+
+
+    return result;
+
+}
+
+
+
+function lbDateKey(
+    date
+) {
 
     const year =
         date.getFullYear();
@@ -1152,13 +1486,19 @@ function formatDateKey(date) {
     const month =
         String(
             date.getMonth() + 1
-        ).padStart(2, "0");
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     const day =
         String(
             date.getDate()
-        ).padStart(2, "0");
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     return `${year}-${month}-${day}`;
@@ -1167,12 +1507,13 @@ function formatDateKey(date) {
 
 
 
-function formatLongDate(date) {
+function lbFormatLongDate(
+    date
+) {
 
     return new Intl.DateTimeFormat(
         "en-MY",
         {
-            weekday: "long",
             day: "2-digit",
             month: "long",
             year: "numeric"
@@ -1183,12 +1524,30 @@ function formatLongDate(date) {
 
 
 
-function formatTimelineDate(date) {
+function lbFormatShortDate(
+    date
+) {
 
     return new Intl.DateTimeFormat(
         "en-MY",
         {
-            weekday: "short",
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    ).format(date);
+
+}
+
+
+
+function lbFormatTinyDate(
+    date
+) {
+
+    return new Intl.DateTimeFormat(
+        "en-MY",
+        {
             day: "2-digit",
             month: "short"
         }
@@ -1199,18 +1558,29 @@ function formatTimelineDate(date) {
 
 
 /* ========================================
-   EMPTY STATE
+   EMPTY LOGBOOK
 ======================================== */
 
-function showNoEntries() {
+function showEmptyLogbook() {
 
     document.getElementById(
-        "timelineList"
+        "weekTimeline"
     ).innerHTML =
         `
-        <p class="empty-task-message">
+        <div class="no-entry-state">
             No logbook entries are available yet.
-        </p>
+        </div>
+        `;
+
+
+    document.getElementById(
+        "weekEntryList"
+    ).innerHTML =
+        `
+        <div class="no-entry-state">
+            Add your first record to
+            data/logbook.json.
+        </div>
         `;
 
 }

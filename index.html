@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Practicum E-Logbook</title>
+    <title>Practicum E-Logbook | About Me</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -52,39 +52,106 @@
             </p>-->
         </section>
 
+<!-- ========================================
+     STUDENT PROFILE + PRACTICUM PROGRESS
+========================================= -->
 
-        <!-- =========================
-             PRACTICUM PROGRESS
-        ========================== -->
+<section
+    class="about-profile"
+    id="practicumProgress"
+    data-start-date="2026-09-21"
+    data-end-date="2027-03-22"
+>
 
-        <!--
-            IMPORTANT:
-            Replace data-start-date and data-end-date
-            with your actual practicum dates.
+    <!-- LEFT: PROFILE PHOTO -->
+    <div class="student-photo-box">
 
-            Format:
-            YYYY-MM-DD
-        -->
-
-        <section
-            class="progress-card"
-            id="practicumProgress"
-            data-start-date="21-09-2026"
-            data-end-date="22-03-2027"
+        <img
+            src="images/profile.jpg"
+            alt="Student Profile Photo"
+            class="student-photo-fixed"
         >
 
-            <div class="progress-header">
+    </div>
+
+
+    <!-- RIGHT: INFORMATION -->
+    <div class="about-profile-content">
+
+
+        <!-- STUDENT INFORMATION -->
+
+        <div class="about-section-heading">
+
+            <p class="section-label">
+                PERSONAL DETAILS
+            </p>
+
+            <h2>
+                Student Information
+            </h2>
+
+        </div>
+
+
+        <div class="student-details-grid">
+
+            <div class="student-detail">
+                <span>Student Name</span>
+                <strong>TAMMIE TAN QIAN HAN</strong>
+            </div>
+
+
+            <div class="student-detail">
+                <span>Matric No.</span>
+                <strong>299660</strong>
+            </div>
+
+
+            <div class="student-detail">
+                <span>Phone Number</span>
+                <strong>+60 11-5508-0119</strong>
+            </div>
+
+
+            <div class="student-detail">
+                <span>Email</span>
+                <strong>ttqh299660@gmail.com</strong>
+            </div>
+
+
+            <div class="student-detail full-width">
+                <span>Home Address</span>
+                <strong>
+                    Kuching, Sarawak, Malaysia
+                </strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- PRACTICUM PROGRESS -->
+
+        <div class="profile-progress">
+
+            <div class="profile-progress-heading">
 
                 <div>
-                    <p class="section-label">
-                        PRACTICUM DURATION
+
+                    <p class="progress-label">
+                        PRACTICUM PROGRESS
                     </p>
 
-                    <h2>6 Months</h2>
+                    <strong id="practicumDateRange">
+                        21 Sept 2026 — 22 Mar 2027
+                    </strong>
+
                 </div>
 
+
                 <span
-                    class="progress-percentage"
+                    class="profile-progress-percent"
                     id="progressPercentage"
                 >
                     0%
@@ -93,26 +160,17 @@
             </div>
 
 
-            <div class="practicum-period">
-                <span>Practicum Progress</span>
-
-                <strong id="practicumDateRange">
-                    21st September 2026 — 22nd March 2027
-                </strong>
-            </div>
-
-
-            <div class="progress-track">
+            <div class="profile-progress-track">
 
                 <div
-                    class="progress-fill"
+                    class="profile-progress-fill"
                     id="progressFill"
                 ></div>
 
             </div>
 
 
-            <div class="progress-footer">
+            <div class="profile-progress-footer">
 
                 <span id="progressDay">
                     Day 0
@@ -124,93 +182,14 @@
 
             </div>
 
-        </section>
+        </div>
 
+    </div>
 
-        <!-- =========================
-             INFORMATION CARDS
-        ========================== -->
+</section>
+       
 
-        <section class="information-grid">
-
-
-            <!-- STUDENT INFORMATION -->
-            <article class="info-card">
-
-                <div class="card-heading">
-                    <span class="card-number">01</span>
-
-                    <div>
-                        <p class="section-label">
-                            PERSONAL DETAILS
-                        </p>
-
-                        <h2>Student Information</h2>
-                    </div>
-                </div>
-
-
-                <div class="info-list">
-
-                    <div class="info-row">
-                        <span class="info-label">
-                            Student Name
-                        </span>
-
-                        <span class="info-value">
-                            TAMMIE TAN QIAN HAN
-                        </span>
-                    </div>
-
-
-                    <div class="info-row">
-                        <span class="info-label">
-                            Matric No.
-                        </span>
-
-                        <span class="info-value">
-                            299660
-                        </span>
-                    </div>
-
-
-                    <div class="info-row">
-                        <span class="info-label">
-                            Phone Number
-                        </span>
-
-                        <span class="info-value">
-                            +60 11-5508-0119
-                        </span>
-                    </div>
-
-
-                    <div class="info-row">
-                        <span class="info-label">
-                            Email
-                        </span>
-
-                        <span class="info-value">
-                            ttqh299660@gmail.com
-                        </span>
-                    </div>
-
-
-                    <div class="info-row">
-                        <span class="info-label">
-                            Home Address
-                        </span>
-
-                        <span class="info-value">
-                            Kuching, Sarawak, Malaysia
-                        </span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
+        <section>
             <!-- COMPANY INFORMATION -->
             <article class="info-card">
 
@@ -253,50 +232,44 @@
                         </span>
                     </div>
 
+                    <div class="supervisor-grid">
 
-                    <div class="info-row">
-                        <span class="info-label">
-                            Company Supervisor
-                        </span>
+                <!-- Supervisor 1 -->
+                <div class="supervisor-item">
 
-                        <span class="info-value">
-                            LAI POH YONG
-                        </span>
-                    </div>
+                    <p class="supervisor-title">
+                        Company Supervisor
+                    </p>
 
+                    <h3>
+                        LAI POH YONG
+                    </h3>  
+                    
+                    <p class="supervisor-title">
+                        Designation
+                    </p>
 
-                    <div class="info-row">
-                        <span class="info-label">
-                            Designation
-                        </span>
+                    <h4>
+                        Technical Lead of Software Development (PHP)
+                    </h4> 
 
-                        <span class="info-value">
-                            Technical Lead of Software Development (PHP)
-                        </span>
-                    </div>
+                    <p class="supervisor-title">
+                        Phone Number
+                    </p>
 
+                    <h4>
+                        +60 16-894-3897
+                    </h4> 
 
-                    <div class="info-row">
-                        <span class="info-label">
-                            Phone Number
-                        </span>
+                     <p class="supervisor-title">
+                        Email
+                    </p>
 
-                        <span class="info-value">
-                            +60 16-894-3897
-                        </span>
-                    </div>
+                    <h4>
+                        laipy@sains.com.my
+                    </h4>
 
-
-                    <div class="info-row">
-                        <span class="info-label">
-                            Email
-                        </span>
-
-                        <span class="info-value">
-                            laipy@sains.com.my
-                        </span>
-                    </div>
-
+                </div> 
                 </div>
 
             </article>
@@ -349,35 +322,6 @@
                 </div>
 
 
-                <!--
-                    If you have another university supervisor,
-                    copy this entire block.
-
-                <div class="supervisor-item">
-
-                    <p class="supervisor-title">
-                        University Supervisor
-                    </p>
-
-                    <h3>
-                        Second Supervisor Name
-                    </h3>
-
-                    <p>
-                        Faculty / School Name
-                    </p>
-
-                    <p>
-                        University Name
-                    </p>
-
-                    <a href="mailto:supervisor2@example.com">
-                        supervisor2@example.com
-                    </a>
-
-                </div>
-                -->
-
             </div>
 
         </section>
@@ -404,8 +348,6 @@
         </div>
 
     </footer>
-
-
     <script src="assets/js/app.js"></script>
 
 </body>

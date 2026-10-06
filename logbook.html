@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -13,14 +14,25 @@
         Practicum E-Logbook | Logbook Entry
     </title>
 
+
+    <!-- Global CSS -->
     <link
         rel="stylesheet"
         href="assets/css/style.css"
     >
+
+
+    <!-- Logbook CSS -->
+    <link
+        rel="stylesheet"
+        href="assets/css/logbook.css"
+    >
+
 </head>
 
 
 <body>
+
 
     <!-- =====================================
          HEADER
@@ -62,55 +74,59 @@
     </header>
 
 
+
     <!-- =====================================
          MOBILE DRAWER BUTTON
     ====================================== -->
 
     <button
-        class="drawer-toggle"
-        id="drawerToggle"
+        class="week-drawer-toggle"
+        id="weekDrawerToggle"
         type="button"
-        aria-label="Open logbook navigation"
     >
         ☰
-        <span>Browse Entries</span>
+        <span>Browse Logbook</span>
     </button>
 
 
     <div
-        class="drawer-overlay"
-        id="drawerOverlay"
+        class="week-drawer-overlay"
+        id="weekDrawerOverlay"
     ></div>
 
 
+
     <!-- =====================================
-         LOGBOOK
+         LOGBOOK APP
+
+         If your official Week 1 starts
+         10 August 2026, keep this date.
+
+         If Week 1 should start 27 July,
+         change it to 2026-07-27.
     ====================================== -->
 
-    <!--
-        Change data-practicum-start
-        to your actual official practicum start date.
-    -->
-
     <main
-        class="logbook-shell container"
+        class="week-logbook container"
         id="logbookApp"
-        data-practicum-start="2026-09-22"
+        data-practicum-start="2026-09-21"
     >
 
 
         <!-- =================================
-             LEFT DRAWER / SIDEBAR
+             LEFT SIDEBAR
         ================================== -->
 
         <aside
-            class="logbook-drawer"
-            id="logbookDrawer"
+            class="week-sidebar"
+            id="weekSidebar"
         >
 
-            <div class="drawer-header">
+
+            <div class="week-sidebar-heading">
 
                 <div>
+
                     <p class="section-label">
                         A261 PRACTICUM
                     </p>
@@ -118,14 +134,14 @@
                     <h2>
                         Logbook
                     </h2>
+
                 </div>
 
 
                 <button
-                    class="drawer-close"
-                    id="drawerClose"
+                    class="week-drawer-close"
+                    id="weekDrawerClose"
                     type="button"
-                    aria-label="Close navigation"
                 >
                     ×
                 </button>
@@ -133,25 +149,24 @@
             </div>
 
 
-            <!-- Calendar / Timeline switch -->
 
-            <div class="drawer-view-switch">
+            <!-- VIEW SWITCH -->
+
+            <div class="logbook-view-switch">
 
                 <button
-                    class="drawer-view-button"
+                    class="logbook-view-button"
                     id="calendarViewButton"
                     type="button"
-                    data-view="calendar"
                 >
                     Calendar
                 </button>
 
 
                 <button
-                    class="drawer-view-button active"
+                    class="logbook-view-button active"
                     id="timelineViewButton"
                     type="button"
-                    data-view="timeline"
                 >
                     Timeline
                 </button>
@@ -159,25 +174,24 @@
             </div>
 
 
-            <!-- =============================
-                 CALENDAR VIEW
-            ============================== -->
+
+            <!-- =================================
+                 CALENDAR
+            ================================== -->
 
             <div
-                class="drawer-panel"
+                class="logbook-side-panel"
                 id="calendarPanel"
                 hidden
             >
 
-                <div class="calendar-header">
+                <div class="mini-calendar-header">
 
                     <button
                         id="previousMonth"
-                        class="calendar-nav-button"
                         type="button"
-                        aria-label="Previous month"
                     >
-                        ←
+                        ‹
                     </button>
 
 
@@ -188,52 +202,51 @@
 
                     <button
                         id="nextMonth"
-                        class="calendar-nav-button"
                         type="button"
-                        aria-label="Next month"
                     >
-                        →
+                        ›
                     </button>
 
                 </div>
 
 
-                <div class="calendar-weekdays">
+                <div class="mini-calendar-weekdays">
 
-                    <span>Sun</span>
                     <span>Mon</span>
                     <span>Tue</span>
                     <span>Wed</span>
                     <span>Thu</span>
                     <span>Fri</span>
                     <span>Sat</span>
+                    <span>Sun</span>
 
                 </div>
 
 
                 <div
-                    class="calendar-grid"
+                    class="mini-calendar-grid"
                     id="calendarGrid"
                 ></div>
 
             </div>
 
 
-            <!-- =============================
-                 TIMELINE VIEW
-            ============================== -->
+
+            <!-- =================================
+                 TIMELINE
+            ================================== -->
 
             <div
-                class="drawer-panel"
+                class="logbook-side-panel"
                 id="timelinePanel"
             >
 
                 <div
-                    class="timeline-list"
-                    id="timelineList"
+                    class="week-timeline"
+                    id="weekTimeline"
                 >
 
-                    <p class="drawer-loading">
+                    <p class="logbook-loading">
                         Loading logbook...
                     </p>
 
@@ -241,19 +254,19 @@
 
             </div>
 
+
         </aside>
 
 
+
         <!-- =================================
-             MAIN ENTRY DISPLAY
+             RIGHT CONTENT
         ================================== -->
 
-        <section class="logbook-content">
+        <section class="week-content">
 
 
-            <!-- Entry heading -->
-
-            <div class="entry-heading">
+            <header class="week-content-heading">
 
                 <div>
 
@@ -261,118 +274,43 @@
                         LOGBOOK ENTRY
                     </p>
 
-                    <h1 id="selectedDateTitle">
-                        Select a logbook entry
+
+                    <h1 id="weekTitle">
+                        Week
                     </h1>
 
 
-                    <p
-                        class="entry-date-code"
-                        id="selectedDateCode"
-                    >
-                        Choose a date from the Calendar or Timeline.
+                    <p id="weekDateRange">
+                        Select a week to view logbook entries.
                     </p>
-
-                </div>
-
-
-                <span
-                    class="week-badge"
-                    id="selectedWeekBadge"
-                    hidden
-                >
-                    Week 1
-                </span>
-
-            </div>
-
-
-            <!-- =============================
-                 DAILY TASKS
-            ============================== -->
-
-            <article class="task-card">
-
-                <div class="task-card-header">
-
-                    <div class="task-icon">
-                        D
-                    </div>
-
-
-                    <div>
-
-                        <p class="section-label">
-                            DAILY RECORD
-                        </p>
-
-                        <h2>
-                            Daily Tasks
-                        </h2>
-
-                    </div>
 
                 </div>
 
 
                 <div
-                    class="task-content"
-                    id="dailyTasks"
+                    class="week-number-badge"
+                    id="weekNumberBadge"
                 >
-
-                    <p class="empty-task-message">
-                        Select a date to view the daily tasks.
-                    </p>
-
+                    Week
                 </div>
 
-            </article>
+            </header>
 
 
-            <!-- =============================
-                 PROJECT TASKS
-            ============================== -->
 
-            <article class="task-card">
+            <!-- Monday - Friday inserted here -->
 
-                <div class="task-card-header">
+            <div
+                class="week-entry-list"
+                id="weekEntryList"
+            ></div>
 
-                    <div class="task-icon">
-                        P
-                    </div>
-
-
-                    <div>
-
-                        <p class="section-label">
-                            PROJECT RECORD
-                        </p>
-
-                        <h2>
-                            Project Tasks
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="task-content"
-                    id="projectTasks"
-                >
-
-                    <p class="empty-task-message">
-                        Select a date to view the project tasks.
-                    </p>
-
-                </div>
-
-            </article>
 
         </section>
 
+
     </main>
+
 
 
     <!-- =====================================
@@ -388,7 +326,6 @@
                 <span id="currentYear"></span>
             </p>
 
-
             <p class="footer-note">
                 For practicum documentation and academic review.
             </p>
@@ -398,8 +335,10 @@
     </footer>
 
 
+
     <script src="assets/js/app.js"></script>
     <script src="assets/js/logbook.js"></script>
+
 
 </body>
 

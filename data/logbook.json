@@ -1,36 +1,125 @@
 [
     {
-        "date": "2026-09-29",
+        "date": "2026-09-21",
         "dailyTasks": [
-            "Reviewed daily operational records and checked items requiring follow-up.",
-            "Updated the relevant information based on the latest available status.",
-            "Prepared the required information for the next working process."
+            "Report on duty at Sarawak Information Systems SDN. BHD.",
+            "Activated company identity including internal email and temporary employee account.",
+            "Attended technical briefing by Mr. Lai Poh Yong under Software Development (PHP) department.",
+            "Received company’s in-house development framework for reviewing, understanding and learning for further workflow and cooperation in team."
         ],
         "projectTasks": [
-            "Continued updating the assigned practicum project."
+            
         ]
     },
+
+    {
+        "date": "2026-09-22",
+        "dailyTasks": [
+            "Reviewed company’s in-house development framework for further workflow and cooperation in team.",
+            "Reviewed company’s Application Security Briefing (OWASP)."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-09-23",
+        "dailyTasks": [
+            "Reviewed company’s in-house development framework for setup.",
+            "Discuss with Mr. Lai Poh Yong about project scope of the project proposal.",
+            "Submit Report Duty Form to UUM Portal."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-09-24",
+        "dailyTasks": [
+            "Attended framework training by Mr. Voong Tze Howe (Framework team) to further understand the company’s framework structure, development workflow and coding practices.",
+            "Reviewed relevant source code to understand how the framework is implemented and applied."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-09-25",
+        "dailyTasks": [
+            "Attended framework training by Mr. Voong Tze Howe (Framework team) to further understand the company’s framework, PHP Application Security Briefing (OWASP).",
+            "Received the requirements and instructions for a hands-on exercise and began applying the company’s framework and coding standards."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-09-28",
+        "dailyTasks": [
+            "Set up the PHP development environment using XAMPP by configuring Apache and MySQL services.",
+            "Placed and accessed the demo application locally through the provided framework directory.",
+            "Explored the framework structure, entry point, and database connection configuration.",
+            "Troubleshooted access and database connection issues using phpMyAdmin."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-09-29",
+        "dailyTasks": [
+            "Developing Search & Listing component structure by referring to the existing component as a development reference.",
+            "Investigated database configuration and connection settings to understand how the framework connects components with the demo database."
+        ],
+        "projectTasks": []
+    },
+
     {
         "date": "2026-09-30",
         "dailyTasks": [
-            "Reviewed outstanding activities and updated the latest status.",
-            "Followed up on items requiring further confirmation."
+            "Developing CRUD component structure by referring to the existing component as a development reference.",
+            "Updated the module class and MySQL class to support data flow between controller, module, and database layers."
         ],
-        "projectTasks": [
-            "Reviewed project information and documented the latest progress.",
-            "Organised supporting information for future reference."
-        ]
+        "projectTasks": []
     },
+
     {
         "date": "2026-10-01",
         "dailyTasks": [
-            "Checked the latest status of assigned daily tasks.",
-            "Updated records based on the latest information received.",
-            "Assisted with follow-up activities where required."
+            "Conducted a code review of the framework source code to gain a better understanding of its structure and implementation.",
+            "Reviewed project-related meeting documents to gain further insight into the company’s ongoing projects, including their details and progress.",
+            "Set up and updated the Practicum e-Logbook page to document internship tasks and progress."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-10-02",
+        "dailyTasks": [
+            "Attended a meeting to gain further understanding of the ongoing project by Ms. Siti Hairulnisa.",
+            "Being assigned project tasks.",
+            "Reviewed project task requirements.",
+            "Proposed practicum project proposal."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-10-05",
+        "dailyTasks": [
+            "Build and enhance E-logbook webpage."
         ],
         "projectTasks": [
-            "Continued working on practicum documentation.",
-            "Reviewed and organised the latest project information."
+            "Reviewed the UI of both assigned modules (Holidays and Officer Activities and Master Planner).",
+            "Analyzed the requirements based on CRUD functions.",
+            "Identify the relevant files, classes, components and functions involved in the assigned modules by tracing the UI."
+        ]
+    },
+
+      {
+        "date": "2026-10-06",
+        "dailyTasks": [
+            "Build and enhance E-logbook webpage."
+        ],
+        "projectTasks": [
+            "Reviewed the UI of both assigned modules (Holidays and Officer Activities and Master Planner).",
+            "Analyzed the requirements based on CRUD functions.",
+            "Identify the relevant files, classes, components and functions involved in the assigned modules by tracing the UI."
         ]
     }
 ]
