@@ -7,9 +7,7 @@
             "Attended technical briefing by Mr. Lai Poh Yong under Software Development (PHP) department.",
             "Received company’s in-house development framework for reviewing, understanding and learning for further workflow and cooperation in team."
         ],
-        "projectTasks": [
-            
-        ]
+        "projectTasks": []
     },
 
     {
@@ -92,9 +90,7 @@
         "date": "2026-10-02",
         "dailyTasks": [
             "Attended a meeting to gain further understanding of the ongoing project by Ms. Siti Hairulnisa.",
-            "Being assigned project tasks.",
-            "Reviewed project task requirements.",
-            "Proposed practicum project proposal."
+            "Received assigned tasks from Mr. Lai Poh Yong."
         ],
         "projectTasks": []
     },
@@ -102,24 +98,49 @@
     {
         "date": "2026-10-05",
         "dailyTasks": [
-            "Build and enhance E-logbook webpage."
+            "Build and enhance E-logbook webpage.",
+            "Reviewed and traced the UI of assigned modules.",
+            "Analyzed the tasks requirements based on CRUD functions."
         ],
-        "projectTasks": [
-            "Reviewed the UI of both assigned modules (Holidays and Officer Activities and Master Planner).",
-            "Analyzed the requirements based on CRUD functions.",
-            "Identify the relevant files, classes, components and functions involved in the assigned modules by tracing the UI."
-        ]
+        "projectTasks": []
     },
 
       {
         "date": "2026-10-06",
         "dailyTasks": [
-            "Build and enhance E-logbook webpage."
+            "Enhance E-logbook webpage.",
+            "Accessed to the company's database and reviewed the database structure and relationships.",
+            "Reviewed the UI of the assigned modules.",
+            "Analyzed the source codes of the assigned modules."
         ],
-        "projectTasks": [
-            "Reviewed the UI of both assigned modules (Holidays and Officer Activities and Master Planner).",
-            "Analyzed the requirements based on CRUD functions.",
-            "Identify the relevant files, classes, components and functions involved in the assigned modules by tracing the UI."
-        ]
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-10-07",
+        "dailyTasks": [
+            "Enhance E-logbook webpage.",
+            "Reviewed the UI of the assigned modules.",
+            "Analyzed the source codes of the assigned modules."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-10-08",
+        "dailyTasks": [
+            "Reviewed the UI of the assigned modules.",
+            "Analyzed the source codes of the assigned modules."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-10-09",
+        "dailyTasks": [
+            "Reviewed the UI of the assigned modules.",
+            "Analyzed the source codes of the assigned modules."
+        ],
+        "projectTasks": []
     }
 ]

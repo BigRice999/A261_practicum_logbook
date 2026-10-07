@@ -46,10 +46,6 @@
 
             <h1>About Me</h1>
 
-            <!--<p>
-                Student and practicum information throughout the
-                six-month industrial training period.
-            </p>-->
         </section>
 
 <!-- ========================================
@@ -63,16 +59,15 @@
     data-end-date="2027-03-22"
 >
 
-    <!-- LEFT: PROFILE PHOTO -->
-    <div class="student-photo-box">
+<!-- LEFT: PROFILE PHOTO -->
 
-        <img
-            src="images/profile.jpg"
-            alt="Student Profile Photo"
-            class="student-photo-fixed"
-        >
+<div class="panel-visual profile-visual">
 
-    </div>
+<img 
+    alt="Student Profile Photo" 
+    class="panel-image profile-image" 
+    src="images/profile.jpg"/>
+</div>
 
 
     <!-- RIGHT: INFORMATION -->
@@ -191,19 +186,24 @@
 
         <section>
             <!-- COMPANY INFORMATION -->
-            <article class="info-card">
+                <article class="info-card branded-panel">
+                    <div class="panel-visual logo-visual">
+                        <img alt="Company Logo placeholder" 
+                             class="panel-image logo-image" 
+                             src="images/logo_sains.png"/></div>
+                             
+                            <div class="panel-information">
+                            <div class="card-heading">
+                                <div>
 
-                <div class="card-heading">
-                    <span class="card-number">02</span>
+                                    <p class="section-label">
+                                        PRACTICUM DETAILS
+                                    </p>
 
-                    <div>
-                        <p class="section-label">
-                            PRACTICUM DETAILS
-                        </p>
+                                    <h2>Company Information</h2>
 
-                        <h2>Company Information</h2>
-                    </div>
-                </div>
+                                </div>
+                            </div>
 
 
                 <div class="info-list">
@@ -281,22 +281,25 @@
              UNIVERSITY SUPERVISORS
         ========================== -->
 
-        <section class="info-card supervisor-card">
+        <section class="info-card supervisor-card branded-panel">
+        <div class="panel-visual logo-visual">
+            <img alt="University Logo placeholder" 
+            class="panel-image logo-image" 
+            src="images/logo_uum.png"/>
+        </div>
 
-            <div class="card-heading">
+        <div class="panel-information">
+        <div class="card-heading">
+            <div>
+                
+                <p class="section-label">
+                    UNIVERSITY
+                </p>
 
-                <span class="card-number">03</span>
-
-                <div>
-                    <p class="section-label">
-                        UNIVERSITY
-                    </p>
-
-                    <h2>UUM Supervisors</h2>
-                </div>
-
+                <h2>UUM Supervisors</h2>
             </div>
 
+        </div>
 
             <div class="supervisor-grid">
 
