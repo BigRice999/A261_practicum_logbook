@@ -149,9 +149,48 @@
     {
         "date": "2026-10-12",
         "dailyTasks": [
-            "Reviewed the UI of the assigned modules.",
-            "Analyzed the source codes of the assigned modules.",
-            "Developing the assigned modules based on the analysis and requirements."
+            "Enhanced User Profile module by adding new search criteria.",
+            "Performed functional testing on the modification for single and combined criteria and committed.",
+            "Reviewed the UI of the Master Planner module.",
+            "Analyzed the source codes of the Master Planner module."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-10-13",
+        "dailyTasks": [
+            "Modified the Master Planner module to allow multiple records added under same date and same user.",
+            "Performed functional testing on the modification above and committed.",
+            "Reviewed the UI of the Individual Planner module.",
+            "Analyzed the source codes of the Individual Planner module."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-10-14",
+        "dailyTasks": [
+            "Modified the Individual Planner module to allow multiple records added under same date and same user.",
+            "Performed functional testing on the modification above and committed."
+        ],
+        "projectTasks": []
+    },  
+
+    {
+        "date": "2026-10-15",
+        "dailyTasks": [
+           "Performed functional testing and non-functional testing on company’s developing system.",
+           "Documented result of testing."
+        ],
+        "projectTasks": []
+    },
+
+    {
+        "date": "2026-10-16",
+        "dailyTasks": [
+            "Performed functional testing and non-functional testing on company’s developing system.",
+           "Documented result of testing."
         ],
         "projectTasks": []
     }
